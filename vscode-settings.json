@@ -1,0 +1,78 @@
+{
+    "workbench.colorCustomizations": {
+        "list.inactiveSelectionBackground": "#554805",
+        // "sideBar.foreground": "#9A9A9A"
+        "tab.activeBackground": "#085c08",
+        "editor.selectionBackground": "#077077",
+        "editor.selectionForeground": "#030708"
+    },
+    "workbench.colorTheme": "Default Dark Modern",
+    "workbench.iconTheme": "material-icon-theme",
+    "editor.tokenColorCustomizations": {
+        "comments": "#09ac24"
+    },
+    "sqltools.autoOpenSessionFiles": false,
+    "sqltools.highlightQuery": false,
+    "indentRainbow.indicatorStyle": "light",
+    "indentRainbow.lightIndicatorStyleLineWidth": 3,
+    "zenMode.hideLineNumbers": false,
+    "haskell.manageHLS": "PATH",
+    "[python]": {
+        "editor.formatOnType": true
+    },
+    "editor.wordWrap": "on",
+    "files.autoSave": "afterDelay",
+    "[haskell]": {
+        "editor.defaultFormatter": "haskell.haskell"
+    },
+    "leetcode.workspaceFolder": "/Users/Shubham.tomar/.leetcode",
+    "editor.formatOnSave": true,
+    "[json]": {
+        "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "leetcode.defaultLanguage": "python3",
+    "explorer.confirmDragAndDrop": false,
+    "workbench.editorAssociations": {
+        "*.xlsx": "default"
+    },
+    "haskell.hlint.executablePath": "haskell.hlint.executablePath",
+    "editor.fontSize": 13,
+    "terminal.integrated.fontSize": 13,
+    "editor.minimap.renderCharacters": false,
+    "editor.minimap.enabled": false,
+    "editor.bracketPairColorization.enabled": true,
+    "editor.guides.bracketPairs": true,
+    "leetcode.hint.commentDescription": false,
+    "go.toolsManagement.autoUpdate": true,
+    "security.workspace.trust.untrustedFiles": "open",
+    "redhat.telemetry.enabled": false,
+    "windsurf.autocompleteSpeed": "fast",
+    "windsurf.autoExecutionPolicy": "off",
+    "windsurf.chatFontSize": "default",
+    "windsurf.rememberLastModelSelection": true,
+    "windsurf.openRecentConversation": true,
+    "windsurf.explainAndFixInCurrentConversation": true,
+    "window.customTitleBarVisibility": "never",
+    // "window.titleBarStyle": "native",
+    "editor.lineHeight": 2.5,
+    "windsurf.enableTabToJump": true,
+    "files.exclude": {
+        "**/.m2/**": true,
+        "**/.m2/*": true
+    },
+    "search.exclude": {
+        "**/*.jar": true,
+        "**/.m2/**": true,
+        "**/.m2/*": true
+    },
+    "files.watcherExclude": {
+        "**/.m2/**": true,
+        "**/.m2/*": true
+    },
+    "java.completion.enabled": false,
+    "java.autobuild.enabled": false,
+    "security.promptForLocalFileProtocolHandling": false,
+    "makefile.configureOnOpen": true,
+    "terminal.integrated.enableMultiLinePasteWarning": "never",
+    "claudeCode.preferredLocation": "panel"
+}
