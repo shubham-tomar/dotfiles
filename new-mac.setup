@@ -1,0 +1,16 @@
+
+# Install homebrew
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install nix
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+
+# brew installs
+brew install docker
+brew install --cask dropbox
+brew install --cask firefox
+brew install --cask google-chrome
+brew install --cask spotify
+brew install --cask sublime-text3
+brew install --cask redis
+
