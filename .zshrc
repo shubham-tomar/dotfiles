@@ -165,15 +165,15 @@ POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(dir vcs newline)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(kubecontext aws time cpu_usage memory_usage newline newline)
 
 # WarpStream
-export PATH="/Users/shubhamtomar/.warpstream:$PATH"
+export PATH="$HOME/.warpstream:$PATH"
 
 # Added by Windsurf
-export PATH="/Users/shubhamtomar/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 
 # Added by LM Studio CLI (lms)
-export PATH="$PATH:/Users/shubhamtomar/.lmstudio/bin"
+export PATH="$PATH:$HOME/.lmstudio/bin"
 # Added by Windsurf
-export PATH="/Users/shubhamtomar/.codeium/windsurf/bin:$PATH"
+export PATH="$HOME/.codeium/windsurf/bin:$PATH"
 
 if [[ -n "$DEVBOX_SHELL" ]]; then
   export POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(custom_devbox dir vcs)
@@ -191,14 +191,14 @@ export PATH="/opt/homebrew/opt/openjdk@11/bin:$PATH"
 export PATH="/opt/homebrew/opt/node@22/bin:$PATH"
 
 
-source /Users/shubhamtomar/.config/broot/launcher/bash/br
-source ~/bin/git-switch-user.sh
+# source $HOME/.config/broot/launcher/bash/br
+# source ~/bin/git-switch-user.sh
 export SPARK_HOME=/opt/homebrew/Cellar/apache-spark/3.5.5/libexec
 export GOCACHE=$HOME/.cache/go-build
 export GOPATH=$HOME/go
 
 # Added by Antigravity
-export PATH="/Users/shubhamtomar/.antigravity/antigravity/bin:$PATH"
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 
 export NVM_DIR="$HOME/.nvm"
@@ -207,7 +207,7 @@ export NVM_DIR="$HOME/.nvm"
 
 
 # bun completions
-[ -s "/Users/shubhamtomar/.bun/_bun" ] && source "/Users/shubhamtomar/.bun/_bun"
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
 # bun
 export BUN_INSTALL="$HOME/.bun"
@@ -216,11 +216,11 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-. "$HOME/.local/bin/env"
-
-. "$HOME/.atuin/bin/env"
-
-eval "$(atuin init zsh)"
+# . "$HOME/.local/bin/env"
+#
+# . "$HOME/.atuin/bin/env"
+#
+# eval "$(atuin init zsh)"
 
 
 
@@ -230,3 +230,9 @@ eval "$(atuin init zsh)"
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+# `claude` resolves via PATH to ~/.local/bin/claude (Claude Code CLI).
+# The Claude *Desktop* app is now under a non-clashing name:
+alias claude-app="/Applications/Claude.app/Contents/MacOS/Claude"
+# Defensive: make sure Claude Code's bin dir is on PATH even if some
+# tool resets PATH after this point.
+[[ ":$PATH:" == *":$HOME/.local/bin:"* ]] || export PATH="$HOME/.local/bin:$PATH"

@@ -1,16 +1,70 @@
+#!/usr/bin/env bash
+#
+# One-time bootstrap for a fresh Mac.
+#
+# Everything here exists because it CANNOT be installed by nix-darwin itself:
+# Nix has to exist before the flake can be evaluated, and the homebrew module
+# drives an existing Homebrew rather than installing it.
+#
+# After this finishes, everything else lives in the flake:
+#     ./darwin.sh switch
+#
+# Usage:  ./new-mac.setup
 
-# Install homebrew
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+set -euo pipefail
 
-# Install nix
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+REPO="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-# brew installs
-brew install docker
-brew install --cask dropbox
-brew install --cask firefox
-brew install --cask google-chrome
-brew install --cask spotify
-brew install --cask sublime-text3
-brew install --cask redis
+info() { printf '\033[1;34m==>\033[0m %s\n' "$*"; }
 
+# 1. Xcode Command Line Tools — provides git, needed to clone this repo.
+if ! xcode-select -p >/dev/null 2>&1; then
+  info "installing Xcode Command Line Tools (accept the GUI prompt)"
+  xcode-select --install
+  read -r -p "Press return once the install has finished... " _
+else
+  info "Xcode Command Line Tools already present"
+fi
+
+# 2. Determinate Nix. nix.enable = false in the flake means nix-darwin never
+#    manages the Nix installation — Determinate owns it, including upgrades
+#    (`sudo determinate-nixd upgrade`).
+if ! command -v nix >/dev/null 2>&1; then
+  info "installing Determinate Nix"
+  curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+  info "open a new shell so nix lands on PATH, then re-run this script"
+  exit 0
+else
+  info "nix already installed: $(nix --version)"
+fi
+
+# 3. Homebrew. The nix-darwin homebrew module runs `brew bundle` against an
+#    existing installation; it will not install Homebrew for you.
+if ! command -v brew >/dev/null 2>&1; then
+  info "installing Homebrew"
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  info "homebrew already installed: $(brew --version | head -1)"
+fi
+
+# 4. Hand off to the flake.
+info "bootstrap complete"
+cat <<EOF
+
+Next:
+
+  1. Add this machine to darwinConfigurations in flake.nix:
+
+         "$(scutil --get LocalHostName)" = mkDarwin {
+           hostname = "$(scutil --get LocalHostName)";
+         };
+
+  2. Apply it:
+
+         ${REPO}/darwin.sh switch
+
+     (or, without editing the flake first, reuse an existing host's config:
+      DARWIN_HOST=<existing-name> ${REPO}/darwin.sh switch)
+
+EOF
